@@ -1,4 +1,3 @@
-import {logDOM} from '@testing-library/react';
 import React, {useEffect} from 'react'
 
 function MoviesTable(props) {
@@ -21,12 +20,16 @@ function MoviesTable(props) {
     }, [])
 
     let newFilteredContent = [];
-    if (props.searchText) {
+    if (props.searchText!=="") {
         newFilteredContent = content.movies.filter((movie) => {
             return movie.title.toLowerCase().includes(props.searchText.toLowerCase());
         });
     } else {
         newFilteredContent = content.movies;
+    }
+
+    if(newFilteredContent){
+        newFilteredContent = newFilteredContent.slice(0,props.noOfItem);
     }
 
     return <div>

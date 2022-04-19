@@ -3,7 +3,7 @@ import React from 'react'
 function InputBox(props) {
 
     let [searchText, SetSearchText] = React.useState("");
-    let [numberOfItem, SetnumberOfItem] = React.useState(0);
+    let [numberOfItem, SetnumberOfItem] = React.useState(9);
 
     const HandleSearchText = (e) => {
         SetSearchText(e.target.value);
@@ -11,6 +11,7 @@ function InputBox(props) {
     }
     const HandlenumberOfItem = (e) => {
         SetnumberOfItem(e.target.value);
+        props.setGlobalSearchItem(e.target.value);
     }
     return (
         <>

@@ -9,7 +9,13 @@ import Pagenation from './MoviesComponent/Pagenation';
  */
 function Movies() {
     let [searchText, setSearchText] = React.useState("");
+    let [noOfItem, setnoOfItem] = React.useState(9);
 
+
+    const setGloabalItem = (items) => {
+        console.log("no => " + items);
+        setnoOfItem(items);
+    }
 
     const setGlobalSearchText = (searchText) => {
 
@@ -20,8 +26,8 @@ function Movies() {
 
     return (<div>
 
-            <InputBox setGlobalSearchText={setGlobalSearchText}> </InputBox>
-            <MoviesTable searchText={searchText}></MoviesTable>
+            <InputBox setGlobalSearchText={setGlobalSearchText} setGlobalSearchItem = {setGloabalItem}> </InputBox>
+            <MoviesTable searchText={searchText} noOfItem = {noOfItem}></MoviesTable>
             <Pagenation></Pagenation>
 
         </div>
