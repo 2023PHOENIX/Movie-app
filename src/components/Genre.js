@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react'
 
-function Genre() {
+function Genre(props) {
     let [isLoaded, setLoaded] = useState(true);
     let [content, setContent] = useState([]);
 
+    const changeGenre = (e) => {
+        let x = e.target.innerText;
+        props.setGlobalGenre(x);
+    }
     useEffect(() => {
         async function fetchGenre() {
             let response = await fetch('https://react-backend101.herokuapp.com/genres');
@@ -28,7 +32,8 @@ function Genre() {
 
 
                 {content.genres.map(function (cat) {
-                    return <div className="mr-6 border-2 w-40 text-center h-10 align-top"> {cat.name} </div>
+                    return <div key = {cat._id} className="mr-6 border-2 w-40 text-center h-10 align-top"
+                                onClick={changeGenre}> {cat.name} </div>
                 })
                 }
 

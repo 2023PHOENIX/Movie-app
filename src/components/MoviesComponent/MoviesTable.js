@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 function MoviesTable(props) {
 
@@ -19,8 +19,18 @@ function MoviesTable(props) {
         fetchData();
     }, [])
 
+
+    const deleteMovie = (movieId) => {
+        let restOfMovies = content.movies.filter((movie) => {
+            return movie._id !== movieId;
+        });
+        // use spread because maybe there are many other fields.
+        let newObject = {...content,movies : restOfMovies};
+        setContent(newObject)
+    }
+
     let newFilteredContent = [];
-    if (props.searchText!=="") {
+    if (props.searchText !== "") {
         newFilteredContent = content.movies.filter((movie) => {
             return movie.title.toLowerCase().includes(props.searchText.toLowerCase());
         });
@@ -28,8 +38,20 @@ function MoviesTable(props) {
         newFilteredContent = content.movies;
     }
 
-    if(newFilteredContent){
-        newFilteredContent = newFilteredContent.slice(0,props.noOfItem);
+    if (newFilteredContent) {
+        newFilteredContent = newFilteredContent.slice(0, props.noOfItem);
+
+
+    }
+
+
+    if (props.cGenre !== "") {
+        console.log(props.cGenre);
+        newFilteredContent = newFilteredContent.filter(movie =>
+        {
+            return movie.genre.name.trim() === props.cGenre.trim();
+        })
+
     }
 
     return <div>
@@ -46,14 +68,17 @@ function MoviesTable(props) {
             </thead>
             <tbody>
             {newFilteredContent.map(function (movie, index) {
-                return <tr>
+                return <tr key = {movie._id}>
                     <td className="px-2 text-center">{index + 1}</td>
                     <td className="px-2 text-center">{movie.title}</td>
                     <td className="px-2 text-center">{movie.genre.name}</td>
                     <td className="px-2 text-center">{movie.numberInStock}</td>
                     <td className="px-2 text-center">{movie.dailyRentalRate}</td>
                     <td>
-                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-0.5 px-1 rounded-full">
+                        <button onClick={()=>{
+                        deleteMovie(movie._id);
+                        }
+                        } class="bg-red-500 hover:bg-red-700 text-white font-bold py-0.5 px-1 rounded-full">
                             delete
                         </button>
                     </td>
