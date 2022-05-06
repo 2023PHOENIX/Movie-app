@@ -4,12 +4,17 @@ import Movies from './Movies';
 function main() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  let [cGenre, setGenre] = React.useState("");
+  let [cGenre, setGenre] = useState("");
 
   const setGlobalGenre = (nGenre) => {
     setGenre(nGenre);
     console.log(cGenre);
   }
+  // route
+  //using switch case will help to find the matching first string|path.
+
+
+  // redirect - from => to=>
 
   return (
   <>

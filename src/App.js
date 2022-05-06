@@ -1,15 +1,25 @@
 // import './App.css';
-import NavBar from "./components/navBar";
-import Main from "./components/main";
+import React from "react";
+import Home from "./Pages/Home";
+// import PageNotFound from "./Pages/PageNotFound";
+import Login from "./Pages/Login";
+import PageNotFound from "./Pages/PageNotFound";
+
+import {BrowserRouter,Routes,Route,Navigate} from "react-router-dom";
 function App() {
   return (
     <div className="App">
 
-      {/* main app for movies */}
-      <NavBar></NavBar>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/home" element={<Home/>}></Route>
+                <Route path="/Login" element={<Login/>}></Route>
+                <Route path="" element={<Navigate replace to="/home"/>} />
+                <Route path="/PageNotFound" element={<PageNotFound/>}></Route>
+            </Routes>
 
-      <div> ============================ </div>
-      <Main> </Main>
+
+        </BrowserRouter>
     </div>
   );
 }

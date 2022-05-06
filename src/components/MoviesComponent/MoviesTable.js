@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+// eslint-disable-next-line
+import React, {useEffect} from 'react'
 
 function MoviesTable(props) {
 
